@@ -14,11 +14,9 @@ int questionsSelectionnees[nbQuestionsQuiz];
 int indexQuestion = 0;
 int score = 0;
 
-// Sélectionne 10 indices uniques aléatoires parmi les questions disponibles
 void genererQuestionsAleatoires() {
   bool dejaPris[nbQuestions] = { false };
   int count = 0;
-
   while (count < nbQuestionsQuiz) {
     int r = random(0, nbQuestions);
     if (!dejaPris[r]) {
@@ -28,55 +26,66 @@ void genererQuestionsAleatoires() {
   }
 }
 
-// Page principale du joueur
 void pageJoueur() {
-  String page = "<!DOCTYPE html><html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Quiz Buzzer</title>";
+  String page = "<!DOCTYPE html><html><head><meta charset='UTF-8'>";
+  page += "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
+  page += "<title>Quiz Buzzer</title>";
   page += css;
   page += "</head><body><div class='container'>";
-  page += "<h1> Quiz </h1>";
 
   if (indexQuestion >= nbQuestionsQuiz) {
-    // Fin du quiz
-    page += "<div class='final-score'>";
-    page += "<h2>🎉 Terminé !</h2>";
-    page += "<div class='score-number'>" + String(score) + "/" + String(nbQuestionsQuiz) + "</div>";
+    // Écran final
+    page += "<div class='final-screen'>";
+    page += "<h2>🎉 Quiz Terminé !</h2>";
+    page += "<div class='score-display'>" + String(score) + "/" + String(nbQuestionsQuiz) + "</div>";
 
     float pourcentage = (score * 100.0) / nbQuestionsQuiz;
     if (pourcentage == 100) {
-      page += "<p style='font-size:1.3em; margin-top:20px;'>🏆 Parfait ! Score maximum !</p>";
+      page += "<p class='message'>🏆 Score parfait ! Incroyable !</p>";
     } else if (pourcentage >= 75) {
-      page += "<p style='font-size:1.3em; margin-top:20px;'>👏 Excellent travail !</p>";
+      page += "<p class='message'>⭐ Excellent travail !</p>";
     } else if (pourcentage >= 50) {
-      page += "<p style='font-size:1.3em; margin-top:20px;'>👍 Bien joué !</p>";
+      page += "<p class='message'>👍 Bien joué !</p>";
     } else {
-      page += "<p style='font-size:1.3em; margin-top:20px;'>💪 Retente ta chance !</p>";
+      page += "<p class='message'>💪 Continue, tu vas y arriver !</p>";
     }
 
-    page += "<a href='/reset'><button class='btn btn-reset'>🔁 Recommencer</button></a>";
+    page += "<a href='/reset'><button class='restart-btn'>🔁 Rejouer</button></a>";
     page += "</div>";
   } else {
-    // Affichage de la question en cours
+    // Question en cours
     int progress = (indexQuestion * 100) / nbQuestionsQuiz;
-    page += "<div class='score'>Score : " + String(score) + " | Question " + String(indexQuestion + 1) + "/" + String(nbQuestionsQuiz) + "</div>";
-    page += "<div class='progress'><div class='progress-bar' style='width:" + String(progress) + "%'></div></div>";
+    
+    page += "<div class='header'>";
+    page += "<h1>⚡ QUIZ TIME</h1>";
+    page += "<div class='score-bar'>⭐ " + String(score) + " points | Question " + String(indexQuestion + 1) + "/" + String(nbQuestionsQuiz) + "</div>";
+    page += "<div class='progress-container'><div class='progress-bar' style='width:" + String(progress) + "%'></div></div>";
+    page += "</div>";
 
     Question &q = quiz[questionsSelectionnees[indexQuestion]];
+    page += "<div class='question-card'>";
     page += "<h2>" + q.texte + "</h2>";
+    page += "<div class='answers-grid'>";
 
-for (int i = 0; i < 4; i++) {
-  char rep = 'A' + i;
-  String couleurClasse = "btn-" + String((char)tolower(rep)); // btn-a, btn-b, etc.
-  page += "<a href='/repondre?r=" + String(rep) + "'><button class='btn " + couleurClasse + "'>";
-  page += "<strong>" + String(rep) + ".</strong> " + q.reponses[i];
-  page += "</button></a>";
-}
+    const char* colors[] = {"red", "blue", "yellow", "green"};
+    // const char* shapes[] = {"▲", "◆", "●", "■"};
+    
+    for (int i = 0; i < 4; i++) {
+      char rep = 'A' + i;
+      page += "<a href='/repondre?r=" + String(rep) + "' style='text-decoration:none;'>";
+      page += "<button class='answer-btn btn-" + String(colors[i]) + "'>";
+      // page += "<span class='symbol'>" + String(shapes[i]) + "</span>";
+      page += q.reponses[i];
+      page += "</button></a>";
+    }
+
+    page += "</div></div>";
   }
 
   page += "</div></body></html>";
   server.send(200, "text/html; charset=UTF-8", page);
 }
 
-// Traite la réponse de l'utilisateur
 void repondre() {
   if (!server.hasArg("r")) {
     server.sendHeader("Location", "/");
@@ -96,7 +105,6 @@ void repondre() {
   server.send(303);
 }
 
-// Réinitialise le quiz
 void resetQuiz() {
   indexQuestion = 0;
   score = 0;
@@ -114,7 +122,7 @@ void setup() {
   server.on("/repondre", repondre);
   server.on("/reset", resetQuiz);
 
-  genererQuestionsAleatoires(); // Génère une première fois
+  genererQuestionsAleatoires();
   server.begin();
   Serial.println("Serveur HTTP lancé !");
 }
