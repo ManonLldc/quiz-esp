@@ -1,4 +1,4 @@
-const char* css = R"(
+const char* css = R"rawliteral(
 <style>
 * {
   margin: 0;
@@ -224,4 +224,4 @@ body {
 .icon-square { content: '■'; }
 .icon-diamond { content: '◆'; }
 </style>
-)";
+)rawliteral";
