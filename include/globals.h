@@ -1,20 +1,13 @@
-#pragma once
-#include <ESP8266WebServer.h>
+#ifndef GLOBALS_H
+#define GLOBALS_H
 
-// Réseau Wi-Fi
-extern const char* ssid;
-extern const char* password;
+#include <Arduino.h>
+#include "joueur.h"
 
-// Serveur web
-extern ESP8266WebServer server;
+extern int nbJoueursConnectes;
+extern bool quizDemarre;
+extern bool quizTermine;
+extern const int maxJoueurs;
+extern Joueur joueurs[];
 
-// Configuration du quiz
-extern const int nbQuestionsQuiz;
-extern int questionsSelectionnees[];
-extern int indexQuestion;
-extern int score;
-
-// Déclarations de fonctions globales
-void genererQuestionsAleatoires();
-void repondre();
-void resetQuiz();
+#endif
