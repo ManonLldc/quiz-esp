@@ -3,21 +3,15 @@
 #include <Arduino.h>
 #include "globals.h"
 
-// int nbJoueursConnectes = 0;
-// bool quizDemarre = false;
-// bool quizTermine = false;
-// const int maxJoueurs = 10;
-// Joueur joueurs[maxJoueurs];
-
 // Page de connexion
 void pageConnexion() {
   String html = "<!DOCTYPE html><html><head><meta charset='UTF-8'>";
   html += "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
   html += "<link rel='stylesheet' href='/style.css'>";
-  html += "<title>Quiz Buzzer - Connexion</title></head><body>";
+  html += "<title>Quiz - Connexion</title></head><body>";
   html += "<div class='container'>";
   html += "<div class='header'>";
-  html += "<h1>🎯 Quiz Buzzer</h1>";
+  html += "<h1>Quiz</h1>";
   html += "</div>";
   
   html += "<div class='question-card'>";
@@ -45,7 +39,7 @@ void pageConnexion() {
     html += "<div style='display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;'>";
     for (int i = 0; i < maxJoueurs; i++) {
       if (joueurs[i].actif) {
-        html += "<div style='background: linear-gradient(135deg, #667eea, #764ba2); color: white; ";
+        html += "<div style='background: linear-gradient(135deg, #667eea, #a2794bff); color: white; ";
         html += "padding: 12px 20px; border-radius: 25px; text-align: center; font-weight: 700; ";
         html += "box-shadow: 0 4px 15px rgba(102,126,234,0.3);'>👤 " + joueurs[i].nom + "</div>";
       }
