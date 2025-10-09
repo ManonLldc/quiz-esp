@@ -7,7 +7,7 @@
 void pageConnexion() {
   String html = "<!DOCTYPE html><html><head><meta charset='UTF-8'>";
   html += "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
-  html += "<link rel='stylesheet' href='/style.css'>";
+  html += "<link rel='stylesheet' href='/css/style.css'>";
   html += "<title>Quiz - Connexion</title></head><body>";
   html += "<div class='container'>";
   html += "<div class='header'>";

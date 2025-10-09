@@ -1,5 +1,4 @@
-const char* css = R"rawliteral(
-<style>
+
 * {
   margin: 0;
   padding: 0;
@@ -223,5 +222,3 @@ body {
 .icon-circle { content: '●'; }
 .icon-square { content: '■'; }
 .icon-diamond { content: '◆'; }
-</style>
-)rawliteral";

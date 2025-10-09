@@ -8,17 +8,19 @@
 #include "./data/data.h"
 
 // Nombre de questions du quiz
-extern const int nbQuestionsQuiz;
+// dans quiz.h
+inline const int nbQuestionsQuiz = 10;
+
 extern int questionsSelectionnees[];
 extern int indexQuestion;
 
 // Fonctions
 void genererQuestionsAleatoires();
 int trouverJoueur(String nom);
-void connexion();
-void pageQuiz();
+// void connexion();
+// void pageQuiz();
 void repondre();
-void pageClassement();
+// void pageClassement();
 void resetQuiz();
 void demarrerQuiz();
 
