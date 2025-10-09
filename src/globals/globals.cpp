@@ -1,4 +1,4 @@
-#include "globals.h"
+#include "./globals/globals.h"
 
 int nbJoueursConnectes = 0;
 bool quizDemarre = false;

@@ -1,7 +1,7 @@
-#include "config.h"
-#include "joueur.h"
+#include "./config/config.h"
+#include "./models/joueur.h"
 #include <Arduino.h>
-#include "globals.h"
+#include "./globals/globals.h"
 
 // Page de connexion
 void pageConnexion() {

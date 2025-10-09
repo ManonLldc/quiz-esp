@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <ESP8266WebServer.h>
-#include "joueur.h"
+#include "./models/joueur.h"
 
 
 // Prototype de la fonction qui génère la page de connexion

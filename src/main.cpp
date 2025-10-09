@@ -1,12 +1,12 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 // #include "data.h"
-#include "style.h"
-#include "config.h"
-#include "joueur.h"
-#include "pageConnexion.h"
+#include "./ui/style.h"
+#include "./config/config.h"
+#include "./models/joueur.h"
+#include "./ui/pageConnexion.h"
 // #include "globals.h"
-#include "quiz.h"
+#include "./quiz/quiz.h"
 
 
 

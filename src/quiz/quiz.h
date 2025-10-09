@@ -3,9 +3,9 @@
 
 #include <Arduino.h>
 #include <ESP8266WebServer.h>
-#include "joueur.h"
-#include "globals.h"
-#include "data.h"
+#include "./models/joueur.h"
+#include "./globals/globals.h"
+#include "./data/data.h"
 
 // Nombre de questions du quiz
 extern const int nbQuestionsQuiz;

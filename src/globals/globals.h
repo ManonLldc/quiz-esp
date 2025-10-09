@@ -2,7 +2,7 @@
 #define GLOBALS_H
 
 #include <Arduino.h>
-#include "joueur.h"
+#include "./models/joueur.h"
 
 extern int nbJoueursConnectes;
 extern bool quizDemarre;
